@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__claude-code-remote__add_repo",
+      "Bash(npm install -g /home/user/agent-orch)",
+      "Bash(oc-dispatch:*)",
+      "Bash(oc-wait:*)",
+      "Bash(oc-show:*)",
+      "Bash(oc-retry:*)",
+      "Bash(oc-verify:*)",
+      "Bash(oc-land:*)",
+      "Bash(oc-status:*)",
+      "Bash(oc-init:*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ \"$CLAUDE_CODE_REMOTE\" = true ] && ! command -v opencode >/dev/null 2>&1; then npm i -g opencode-ai >/dev/null 2>&1; fi; exit 0",
+            "timeout": 180
+          }
+        ]
+      }
+    ]
+  }
+}
